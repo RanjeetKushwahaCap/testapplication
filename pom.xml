@@ -89,7 +89,7 @@
 <muleVersion>4.1.4</muleVersion>
           <username>RanjeetKushwahaCap</username> 
           <password>Raj@2018</password> 
-          <applicationName>TestApplication</applicationName>
+          <applicationName>testApplicationV1</applicationName>
           <environment>Sandbox</environment> 
  <uri>https://anypoint.mulesoft.com</uri>                                                                                               
 <workerType>MICRO</workerType>
