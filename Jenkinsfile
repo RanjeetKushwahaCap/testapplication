@@ -1,7 +1,7 @@
 pipeline {
   agent any
   stages {
-    stage('Unit Test') {
+    stage('Build & Unit Test') {
       steps {
         bat 'mvn clean test'
       }
