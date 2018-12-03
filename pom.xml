@@ -83,8 +83,10 @@
         <groupId>org.mule.tools.maven</groupId>
         <artifactId>mule-maven-plugin</artifactId>
         <configuration>
-          <deploymentType>cloudhub</deploymentType>
-		<muleVersion>4.1.4</muleVersion>
+        
+        
+             <cloudHubDeployment>
+<muleVersion>4.1.4</muleVersion>
           <username>RanjeetKushwahaCap</username> 
           <password>Raj@2018</password> 
           <applicationName>TestApplication</applicationName>
@@ -93,6 +95,12 @@
           <workerType>MICRO</workerType>
           <workers>1</workers>
 <region>ap-southeast-2</region>
+ </cloudHubDeployment>
+        
+        
+        
+        
+		
 
         </configuration>
         <executions>
