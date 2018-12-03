@@ -84,16 +84,16 @@
         <artifactId>mule-maven-plugin</artifactId>
         <configuration>
           <deploymentType>cloudhub</deploymentType>
-          <muleVersion>${mule.version}</muleVersion> 
-          <username>${anypoint.username}</username> 
-          <password>${anypoint.password}</password> 
-          <applicationName>${artifactId}</applicationName>
-          <environment>${cloundhub.env}</environment> 
-          <businessGroup>${anypoint.businessGroup}</businessGroup>
-          <region>${cloudhub.region}</region>
-          <uri>${anypoint.uri}</uri> 
-          <workerType>${cloudhub.workerType}</workerType>
-          <workers>${cloudhub.workers}</workers>
+		<muleVersion>4.1.4</muleVersion>
+          <username>RanjeetKushwahaCap</username> 
+          <password>Raj@2018</password> 
+          <applicationName>TestApplication</applicationName>
+          <environment>sandbox</environment> 
+		<anypoint.uri>https://anypoint.mulesoft.com</anypoint.uri>
+          <workerType>MICRO</workerType>
+          <workers>1</workers>
+<region>ap-southeast-2</region>
+
         </configuration>
         <executions>
           <execution>
@@ -112,8 +112,8 @@
     <repository>
       <uniqueVersion>false</uniqueVersion>
       <id>Mulesoft</id>
-      <name>Corporate Repository</name>
-      <url>file:///D:/Dependencies</url>
+      <name> Repository</name>
+      <url>file:///D:/MuleSoft Intallation/Dependencies</url>
       <layout>default</layout>
     </repository>
     </distributionManagement>
