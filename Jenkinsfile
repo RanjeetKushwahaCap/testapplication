@@ -35,6 +35,8 @@ pipeline {
       steps {
         bat 'mvn deploy -P cloudhub -Dmule.version=4.1.4 -Danypoint.username=RanjeetKushwahaCap -Danypoint.password=Raj@2018'
       }
-    }*/
+    }
+	
+	*/
   }
 }
