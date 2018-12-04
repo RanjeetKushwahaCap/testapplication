@@ -17,9 +17,23 @@ pipeline {
   stages {
     stage('Build & Unit Test') {
       steps {
-        bat 'mvn clean package -DskipTests=true'
+        bat 'mvn -s $MAVEN_SETTINGS clean package -DskipTests=true'
       }
     }
+    
+    
+    stage('Upload Artifact'){
+        
+        script {
+                                        def server = Artifactory.newServer url: 'http://localhost:8081/artifactory', credentialsId: 'mulesoft-artifactory'
+                                        server.bypassProxy = true
+                                        def buildInfo = server.upload spec: uploadSpec
+                                        } 
+        
+        
+    }
+    
+    
  
 /*    stage('Deploy CloudHub') {
       environment {
