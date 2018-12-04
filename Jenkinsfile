@@ -16,8 +16,6 @@ pipeline {
   stage ('upload') {
   
   steps{
-  
-    gitlabCommitStatus("upload") {
       def server = Artifactory.server "artifactory@Mule"
       def buildInfo = Artifactory.newBuildInfo()
       buildInfo.env.capture = true
@@ -43,7 +41,7 @@ pipeline {
       buildInfo.retention maxBuilds: 10, maxDays: 7, deleteBuildArtifacts: true
       // Publish build info.
       server.publishBuildInfo buildInfo
- }}}
+ }}
 /*    stage('Deploy CloudHub') {
       environment {
         ANYPOINT_CREDENTIALS = credentials('anypoint.credentials')
