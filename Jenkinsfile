@@ -5,9 +5,15 @@ pipeline {
            def uploadSpec = """{
            "files": [
                {
-               "pattern": "target/*.zip",
-                   "target": "libs-snapshot-local/mulesoft_integration/"
-               }
+            "pattern": "**/target/*.jar",
+            "target": "libs-snapshot-local"
+          }, {
+            "pattern": "**/target/*.pom",
+            "target": "libs-snapshot-local"
+          }, {
+            "pattern": "**/target/*.war",
+            "target": "libs-snapshot-local"
+          }
            ]
     }"""
         
@@ -19,15 +25,40 @@ pipeline {
       steps {
         bat 'mvn clean package -DskipTests=true'
         
-          script {
-                                        def server = Artifactory.newServer url: 'http://localhost:8081/artifactory', credentialsId: 'mulesoft-artifactory'
-                                        server.bypassProxy = true
-                                        def buildInfo = server.upload spec: uploadSpec
-                                        } 
+         
       }
+	  
     }
 
  
+  stage ('upload') {
+    gitlabCommitStatus("upload") {
+      def server = Artifactory.server "artifactory@ibsrv02"
+      def buildInfo = Artifactory.newBuildInfo()
+      buildInfo.env.capture = true
+      buildInfo.env.collect()
+
+      def uploadSpec = """{
+        "files": [
+          {
+            "pattern": "**/target/*.jar",
+            "target": "libs-snapshot-local"
+          }, {
+            "pattern": "**/target/*.pom",
+            "target": "libs-snapshot-local"
+          }, {
+            "pattern": "**/target/*.war",
+            "target": "libs-snapshot-local"
+          }
+        ]
+      }"""
+      // Upload to Artifactory.
+      server.upload spec: uploadSpec, buildInfo: buildInfo
+
+      buildInfo.retention maxBuilds: 10, maxDays: 7, deleteBuildArtifacts: true
+      // Publish build info.
+      server.publishBuildInfo buildInfo
+ }}
 /*    stage('Deploy CloudHub') {
       environment {
         ANYPOINT_CREDENTIALS = credentials('anypoint.credentials')
