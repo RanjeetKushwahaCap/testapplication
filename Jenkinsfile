@@ -17,7 +17,7 @@ pipeline {
   stages {
     stage('Build & Unit Test') {
       steps {
-        bat 'mvn -s $MAVEN_SETTINGS clean package -DskipTests=true'
+        bat 'mvn clean package -DskipTests=true'
         
           script {
                                         def server = Artifactory.newServer url: 'http://localhost:8081/artifactory', credentialsId: 'mulesoft-artifactory'
