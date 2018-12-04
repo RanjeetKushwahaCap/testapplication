@@ -1,24 +1,6 @@
 pipeline {
   agent any
   
-    environment {
-           def uploadSpec = """{
-           "files": [
-               {
-            "pattern": "**/target/*.jar",
-            "target": "libs-snapshot-local"
-          }, {
-            "pattern": "**/target/*.pom",
-            "target": "libs-snapshot-local"
-          }, {
-            "pattern": "**/target/*.war",
-            "target": "libs-snapshot-local"
-          }
-           ]
-    }"""
-        
-        
-    }
   
   stages {
     stage('Build & Unit Test') {
@@ -32,8 +14,11 @@ pipeline {
 
  
   stage ('upload') {
+  
+  steps{
+  
     gitlabCommitStatus("upload") {
-      def server = Artifactory.server "artifactory@ibsrv02"
+      def server = Artifactory.server "artifactory@Mule"
       def buildInfo = Artifactory.newBuildInfo()
       buildInfo.env.capture = true
       buildInfo.env.collect()
@@ -58,7 +43,7 @@ pipeline {
       buildInfo.retention maxBuilds: 10, maxDays: 7, deleteBuildArtifacts: true
       // Publish build info.
       server.publishBuildInfo buildInfo
- }}
+ }}}
 /*    stage('Deploy CloudHub') {
       environment {
         ANYPOINT_CREDENTIALS = credentials('anypoint.credentials')
